@@ -21,21 +21,25 @@ class HUDImage extends HUDObject {
             this.height = this._image.height;
         }
 
-        let alpha = this.alpha;
-        let x = this.position.x - this.pivot.x - this.anchor.x * this.width;
-        let y = this.position.y - this.pivot.y - this.anchor.y * this.height;
-        let parent = this.parent;
-        while (parent) {
-            x += parent.position.x - parent.pivot.x;
-            y += parent.position.y - parent.pivot.y;
-            alpha *= parent.alpha;
+        context.save();
+        context.translate(
+            this.position.x/* - (this.pivot.x * this.scale.x) - (this.anchor.x * this.width * this.scale.x)*/, 
+            this.position.y/* - (this.pivot.y * this.scale.y) - (this.anchor.y * this.height * this.scale.y)*/
+        );
+        context.rotate(this.rotation);
+        context.scale(this.scale.x, this.scale.y);
+        context.translate(
+            -this.pivot.x - this.anchor.x * this.width,
+            -this.pivot.y - this.anchor.y * this.height
+        );
 
-            parent = parent.parent;
-        }
+        let alpha = context.globalAlpha;
+        context.globalAlpha = Math.min(1, Math.max(0, context.globalAlpha * this.alpha));
 
-        context.globalAlpha = Math.min(1, Math.max(0, alpha));
+        context.drawImage(this._image, 0, 0);
 
-        context.drawImage(this._image, x, y);
+        context.restore();
+        context.globalAlpha = alpha;
         
         super.render(context);
     }
