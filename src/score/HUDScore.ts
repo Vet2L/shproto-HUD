@@ -1,8 +1,8 @@
 import { gsap } from 'gsap';
 
-import HUDObject from './base/HUDObject';
-import HUDImage from './base/HUDImage';
-import HUDText from './base/HUDText';
+import HUDObject from '../base/HUDObject';
+import HUDImage from '../base/HUDImage';
+import HUDText from '../base/HUDText';
 
 import HUDScoreKill from './HUDScoreKill';
 import HUDScoreMain from './HUDScoreMain';

@@ -14,11 +14,17 @@ class HUDImage extends HUDObject {
 
     render(context: CanvasRenderingContext2D) {
         if (!this.visible) { return; }
+        if (this.isMask) { return; }
 
         if (!this._image.complete) { return; }
         else {
             this.width = this._image.width;
             this.height = this._image.height;
+        }
+
+        if (this.mask) {
+            this.mask.path(context);
+            context.clip();
         }
 
         context.save();
@@ -38,10 +44,10 @@ class HUDImage extends HUDObject {
 
         context.drawImage(this._image, 0, 0);
 
+        super.render(context);
+        
         context.restore();
         context.globalAlpha = alpha;
-        
-        super.render(context);
     }
 }
 

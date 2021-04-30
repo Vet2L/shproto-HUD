@@ -1,8 +1,8 @@
 import { gsap } from 'gsap';
 
-import HUDObject from './base/HUDObject';
-import HUDText from './base/HUDText';
-import HUDImage from './base/HUDImage';
+import HUDObject from '../base/HUDObject';
+import HUDText from '../base/HUDText';
+import HUDImage from '../base/HUDImage';
 
 class HUDScoreKill extends HUDObject {
     skull: HUDImage;

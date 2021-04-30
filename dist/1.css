@@ -6,3 +6,11 @@
     position: absolute;
     pointer-events: none;
 }
+
+.hud-shop {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}

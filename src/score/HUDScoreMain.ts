@@ -1,5 +1,5 @@
-import HUDObject from './base/HUDObject';
-import HUDText from './base/HUDText';
+import HUDObject from '../base/HUDObject';
+import HUDText from '../base/HUDText';
 import { gsap } from 'gsap';
 
 class HUDScoreMain extends HUDObject {

@@ -1,17 +1,21 @@
 import Point from './Point';
 
+import HUDGraphics from './HUDGraphics';
+
 class HUDObject {
     position: Point;
     pivot: Point;
     anchor: Point;
     scale: Point;
 
+    _mask: HUDGraphics;
     parent: HUDObject;
     children: Array<HUDObject>;
 
     alpha: number = 1;
     rotation: number = 0;
     visible: boolean = true;
+    isMask: number = 0;
 
     constructor(){
         this.position = new Point();
@@ -20,6 +24,20 @@ class HUDObject {
         this.scale = new Point(1, 1);
 
         this.children = new Array<HUDObject>();
+    }
+
+    get mask(){
+        return this._mask;
+    }
+
+    set mask(mask: HUDGraphics){
+        if (this._mask) {
+            this._mask.isMask--;
+        }
+        this._mask = mask;
+        if (this._mask) {
+            this._mask.isMask++;
+        }
     }
 
     setParent(parent: HUDObject){
@@ -66,6 +84,7 @@ class HUDObject {
 
     render(context: CanvasRenderingContext2D){
         if (!this.visible) { return; }
+        if (this.isMask) { return; }
 
         context.save();
         context.translate(this.position.x, this.position.y);
@@ -75,6 +94,11 @@ class HUDObject {
 
         let alpha = context.globalAlpha;
         context.globalAlpha = Math.min(Math.max(0, context.globalAlpha * this.alpha), 1);
+
+        if (this.mask) {
+            this.mask.path(context);
+            context.clip();
+        }
 
         for (let i = 0; i < this.children.length; ++i) {
             this.children[i].render(context);

@@ -17,6 +17,13 @@ class HUDText extends HUDObject {
 
     render(context: CanvasRenderingContext2D){
         if (!this.visible) { return; }
+        if (this.isMask) { return; }
+
+        if (this.mask) {
+            this.mask.path(context);
+            context.clip();
+        }
+        
         /* not sure about round number of font size */
         context.font = `${/*Math.round(*/this.fontSize/*)*/}px ${this.fontFamily}`;
         context.fillStyle = this.color;
@@ -35,11 +42,11 @@ class HUDText extends HUDObject {
         context.globalAlpha = Math.min(1, Math.max(0, context.globalAlpha * this.alpha));
 
         context.fillText(this.text, 0, this.fontSize);
+        
+        super.render(context);
 
         context.restore();
         context.globalAlpha = alpha;
-        
-        super.render(context);
     }
 }
 

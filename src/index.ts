@@ -1,5 +1,6 @@
 import HUDApp from './base/HUDApp';
-import HUDScore from './HUDScore';
+import HUDScore from './score/HUDScore';
+import HUDShop from './shop/HUDShop';
 
 function hudPrototype() {
     const div = document.querySelector('.hud-score');
@@ -64,7 +65,18 @@ function hudPrototype() {
     let btn: HTMLButtonElement = document.querySelector('.hud-test__button');
     btn.onclick = onButtonClick;
 
-    console.log("READY")
+    const shopDiv = document.querySelector('.hud-shop');
+    const shopApp = new HUDApp(shopDiv, 900, 720);
+
+    const shop = new HUDShop();
+    shopApp.scene.addChild(shop);
+
+    //@ts-ignore
+    window.shopApp = shopApp;
+    //@ts-ignore
+    window.shop = shop;
+
+    console.log("READY");
 }
 
 hudPrototype();

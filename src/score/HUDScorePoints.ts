@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 
-import HUDObject from './base/HUDObject';
-import HUDText from './base/HUDText';
+import HUDObject from '../base/HUDObject';
+import HUDText from '../base/HUDText';
 
 import IScorePoint from './IScorePoint';
 

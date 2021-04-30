@@ -17,12 +17,16 @@ class HUDApp {
     height: number;
 
     constructor(view: HTMLElement | Element = document.body, width: number = 640, height: number = 480){
-        this.canvas = document.createElement('canvas');
-        this.canvas.className = "hud-canvas";
+        if (view.tagName === "CANVAS") {
+            this.canvas = <HTMLCanvasElement> view;
+        } else {
+            this.canvas = document.createElement('canvas');
+            this.canvas.className = "hud-canvas";
+            view.appendChild(this.canvas);
+        }
         this.canvas.width = this.width = width;
         this.canvas.height = this.height = height;
 
-        view.appendChild(this.canvas);
         this.context = this.canvas.getContext('2d', { alpha: true });
         this.scene = new HUDObject();
 
