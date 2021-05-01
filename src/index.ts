@@ -70,6 +70,7 @@ function hudPrototype() {
 
     const shop = new HUDShop();
     shopApp.scene.addChild(shop);
+    shop.onResize(900, 720);
 
     //@ts-ignore
     window.shopApp = shopApp;

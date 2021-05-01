@@ -1,0 +1,34 @@
+{
+    "categories": [
+        {
+            "name": "Pistols",
+            "items": [
+                {
+                    "name": "Glock 18",
+                    "price": 800
+                },
+                {
+                    "name": "Desert Eagle",
+                    "price": 1400
+                },
+                {
+                    "name": "Renetti",
+                    "price": 1200
+                },
+                {
+                    "name": "Colt 1911",
+                    "price": 1000
+                }
+            ]
+        },
+        {
+            "name": "SMG",
+            "items": [
+                {
+                    "name": "MP-5",
+                    "price": 2000
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+TODO:
+
+- shop list example +-
+- shop layout +
+- shop scrollable containers (mask)
+- animations
+- events
