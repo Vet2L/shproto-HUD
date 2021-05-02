@@ -9,6 +9,9 @@ class HUDCategories extends HUDObject {
 
     items: Array<HUDCategoryItem>;
 
+    container: HUDObject;
+    containerMask: HUDGraphics;
+
     constructor(data: Array<IShopCategory> = []){
         super();
 
@@ -19,6 +22,15 @@ class HUDCategories extends HUDObject {
         this.background.alpha = 0.5;
         this.addChild(this.background);
 
+        this.container = new HUDObject();
+        this.addChild(this.container);
+
+        this.containerMask = new HUDGraphics();
+        this.addChild(this.containerMask);
+        this.containerMask.fillStyle('#ff0000').drawRect(0, 0, 2, 2);
+
+        this.container.mask = this.containerMask;
+
         this.setData(data);
     }
 
@@ -28,14 +40,14 @@ class HUDCategories extends HUDObject {
 
         for (let i = 0; i < data.length; ++i) {
             let category = new HUDCategoryItem(data[i]);
-            this.addChild(category);
+            this.container.addChild(category);
             this.items.push(category);
         }
     }
 
     removeData(){
         for (let i = 0; i < this.items.length; ++i) {
-            this.removeChild(this.items[i]);
+            this.container.removeChild(this.items[i]);
         };
 
         this.items = [];
@@ -43,6 +55,10 @@ class HUDCategories extends HUDObject {
 
     onResize(width: number, height: number) {
         this.background.scale.set(width / 2, height / 2);
+
+        // this.containerMask.clear();
+        // this.containerMask.drawRect(0, 0, width, height);
+        this.containerMask.scale.set(width / 2, height / 2);
 
         for (let i = 0; i < this.items.length; ++i) {
             this.items[i].resize(width - 10, 40);

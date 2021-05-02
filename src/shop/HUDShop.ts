@@ -5,7 +5,8 @@ import HUDText from '../base/HUDText';
 import HUDCategories from './HUDCategories';
 import HUDItemsContainer from './HUDItemsContainer';
 
-const exampleData = require('./example_shopData.json')
+// const exampleData = require('./example_shopData.json');
+const exampleData = require('./example_shopCategories.json');
 
 class HUDShop extends HUDObject {
     // category list
@@ -55,8 +56,10 @@ class HUDShop extends HUDObject {
 
         this.categoryLabel.position.set(20, 20);
 
-        this.categories.position.set(10, 55);
-        this.categories.onResize(250, height - 65);
+        // this.categories.position.set(10, 55);
+        // this.categories.onResize(250, height - 65);
+        this.categories.position.set(10, 55 + (height - 65) / 4);
+        this.categories.onResize(250, (height - 65) / 2);
 
         this.hint.position.set(265, 60);
 

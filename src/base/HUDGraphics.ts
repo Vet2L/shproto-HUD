@@ -62,11 +62,25 @@ class HUDGraphics extends HUDObject {
         return this;
     }
 
+    clear(){
+        this._drawables = [];
+        return this;
+    }
+
     path(context: CanvasRenderingContext2D){
+        context.save();
+        
+        context.translate(this.position.x, this.position.y);
+        context.rotate(this.rotation);
+        context.scale(this.scale.x, this.scale.y);
+        context.translate( -this.pivot.x, -this.pivot.y);
+
         context.beginPath();
         for (let i = 0; i < this._drawables.length; ++i) {
             this._drawables[i].path(context);
         }
+
+        context.restore();
     }
 
     render(context: CanvasRenderingContext2D){

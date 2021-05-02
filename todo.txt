@@ -2,6 +2,6 @@ TODO:
 
 - shop list example +-
 - shop layout +
-- shop scrollable containers (mask)
+- shop scrollable containers (mask) (mask fixed)
+- events (make global rect of all drawable objects for fast check)
 - animations
-- events

@@ -86,6 +86,11 @@ class HUDObject {
         if (!this.visible) { return; }
         if (this.isMask) { return; }
 
+        if (this.mask) {
+            this.mask.path(context);
+            context.clip();
+        }
+        
         context.save();
         context.translate(this.position.x, this.position.y);
         context.rotate(this.rotation);
@@ -95,10 +100,6 @@ class HUDObject {
         let alpha = context.globalAlpha;
         context.globalAlpha = Math.min(Math.max(0, context.globalAlpha * this.alpha), 1);
 
-        if (this.mask) {
-            this.mask.path(context);
-            context.clip();
-        }
 
         for (let i = 0; i < this.children.length; ++i) {
             this.children[i].render(context);

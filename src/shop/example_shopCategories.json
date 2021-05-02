@@ -1,0 +1,97 @@
+{
+    "categories": [
+        {
+            "name": "Pistols",
+            "items": [
+                {
+                    "name": "Glock 18",
+                    "price": 800
+                },
+                {
+                    "name": "Desert Eagle",
+                    "price": 1400
+                },
+                {
+                    "name": "Renetti",
+                    "price": 1200
+                },
+                {
+                    "name": "Colt 1911",
+                    "price": 1000
+                }
+            ]
+        },
+        {
+            "name": "SMG",
+            "items": [
+                {
+                    "name": "MP-5",
+                    "price": 2000
+                }
+            ]
+        },
+        {
+            "name": "Category 3",
+            "items": [
+                {
+                    "name": "Item 1",
+                    "price": "300"
+                }
+            ]
+        },
+        {
+            "name": "Category 4",
+            "items": [
+                {
+                    "name": "Item 2",
+                    "price": "300"
+                }
+            ]
+        },
+        {
+            "name": "Category 5",
+            "items": [
+                {
+                    "name": "Item 3",
+                    "price": "300"
+                }
+            ]
+        },
+        {
+            "name": "Category 6",
+            "items": [
+                {
+                    "name": "Item 4",
+                    "price": "300"
+                }
+            ]
+        },
+        {
+            "name": "Category 7",
+            "items": [
+                {
+                    "name": "Item 5",
+                    "price": "300"
+                }
+            ]
+        },
+        {
+            "name": "Category 8",
+            "items": [
+                {
+                    "name": "Item 6",
+                    "price": "300"
+                }
+            ]
+        },
+        {
+            "name": "Category 9",
+            "items": [
+                {
+                    "name": "Item 7",
+                    "price": "300"
+                }
+            ]
+        }
+    ]
+}
