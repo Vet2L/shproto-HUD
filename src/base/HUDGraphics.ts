@@ -47,6 +47,8 @@ class RectObject extends DrawObject {
 
 class HUDGraphics extends HUDObject {
     _drawables: Array<DrawObject> = [];
+    width: number = 0;
+    height: number = 0;
 
     constructor(){
         super();
@@ -59,6 +61,8 @@ class HUDGraphics extends HUDObject {
 
     drawRect(x: number, y: number, width: number, height: number){
         this._drawables.push(new RectObject(x, y, width, height));
+        this.width = width;
+        this.height = height;
         return this;
     }
 
@@ -111,6 +115,17 @@ class HUDGraphics extends HUDObject {
         context.globalAlpha = alpha;
     }
 
+    updateHitArea(){
+        this.hitArea.setRect(0, 0, this.width, this.height);
+        this.hitArea.move(this.position.x, this.position.y);
+        this.hitArea.scale(this.scale.x, this.scale.y);
+        this.hitArea.move(
+            (-(this.pivot.x) - (this.anchor.x * this.width)) * this.scale.x,
+            (-(this.pivot.y) - (this.anchor.y * this.height)) * this.scale.y
+        );
+
+        super.updateHitArea();
+    }
 }
 
 export default HUDGraphics;

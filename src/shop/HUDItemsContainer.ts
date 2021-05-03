@@ -4,6 +4,8 @@ import HUDGraphics from '../base/HUDGraphics';
 import HUDShopItem from './HUDShopItem';
 import IShopItem from './IShopItem';
 
+import { gsap } from 'gsap';
+
 class HUDItemsContainer extends HUDObject{
     background: HUDGraphics;
 
@@ -30,6 +32,11 @@ class HUDItemsContainer extends HUDObject{
 
         for (let i = 0; i < data.length; ++i) {
             let item = new HUDShopItem(data[i]);
+
+            /* key label */
+            if (i < 9) {
+                item.keyLabel.text = `'${(i+1)}'`;
+            }
             this.items.push(item);
             this.addChild(item);
         }
@@ -45,18 +52,39 @@ class HUDItemsContainer extends HUDObject{
         this.items = [];
     }
 
-    updateItemsPositions(){
+    updateItemsPositions(anim: boolean = false){
         let x = 0;
         let y = 0;
         for (let i = 0; i < this.items.length; ++i) {
             this.items[i].matrix.set(x, y);
             this.items[i].updateSize(this.maxWidth / this.cols);
+            this.items[i].toPosition(anim);
             x++;
             if (x >= this.cols) {
                 x = 0;
                 y++;
             }
         }
+    }
+
+    /* return true, if item in list (we have unlimit cash, so ignore that price) */
+    onItemBuy(index: number): boolean{
+        let item = this.items[index];
+        if (!item) { return false; }
+
+        this.items.splice(index, 1);
+        // this.removeChild(item);
+        gsap.to(item.scale, {
+            x: 0, y: 0,
+            duration: 0.4,
+            onComplete: ()=>{
+                this.removeChild(item);
+            }
+        });
+
+        this.updateItemsPositions(true);
+
+        return true;
     }
 
     onResize(width: number, height: number) {

@@ -48,6 +48,18 @@ class HUDText extends HUDObject {
         context.restore();
         context.globalAlpha = alpha;
     }
+
+    updateHitArea(){
+        this.hitArea.setRect(0, 0, this.metric.width, this.fontSize);
+        this.hitArea.move(this.position.x, this.position.y);
+        this.hitArea.scale(this.scale.x, this.scale.y);
+        this.hitArea.move(
+            (-(this.pivot.x) - (this.anchor.x * this.metric.width)) * this.scale.x,
+            (-(this.pivot.y) - (this.anchor.y * this.fontSize)) * this.scale.y
+        );
+
+        super.updateHitArea();
+    }
 }
 
 export default HUDText;

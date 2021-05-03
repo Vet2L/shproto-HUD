@@ -6,6 +6,8 @@ import HUDShopItem from './HUDShopItem';
 
 import IShopCategory from './IShopCategory';
 
+import { gsap } from 'gsap';
+
 class HUDCategoryItem extends HUDObject {
     background: HUDGraphics;
     label: HUDText;
@@ -29,6 +31,34 @@ class HUDCategoryItem extends HUDObject {
         this.addChild(this.label);
 
         this.label.position.set(5, 5);
+    }
+
+    onFocus(){
+        // this.alpha = 1;
+        gsap.to(this.background, {
+            alpha: 0.75,
+            duration: 0.4
+        });
+    }
+
+    onUnfocus(){
+        // this.alpha = 0.5;
+        gsap.to(this, {
+            alpha: 0.5,
+            duration: 0.4
+        });
+    }
+
+    resetFocus(){
+        // this.alpha = 1;
+        gsap.to(this, {
+            alpha: 1,
+            duration: 0.4
+        });
+        gsap.to(this.background, {
+            alpha: 0.5, 
+            duration: 0.4
+        });
     }
 
     resize(width: number, height: number) {

@@ -49,6 +49,18 @@ class HUDImage extends HUDObject {
         context.restore();
         context.globalAlpha = alpha;
     }
+
+    updateHitArea(){
+        this.hitArea.setRect(0, 0, this.width, this.height);
+        this.hitArea.move(this.position.x, this.position.y);
+        this.hitArea.scale(this.scale.x, this.scale.y);
+        this.hitArea.move(
+            (-(this.pivot.x) - (this.anchor.x * this.width)) * this.scale.x,
+            (-(this.pivot.y) - (this.anchor.y * this.height)) * this.scale.y
+        );
+
+        super.updateHitArea();
+    }
 }
 
 export default HUDImage;

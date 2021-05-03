@@ -4,6 +4,12 @@ interface HUDAppOptions {
     transparency: boolean
 }
 
+interface HUDEvent {
+    type: string;
+    x: number;
+    y: number;
+}
+
 class HUDApp {
     _time: number = -1;
     lifetime: number = 0;
@@ -32,6 +38,36 @@ class HUDApp {
 
         this.render = this.render.bind(this);
         this.render();
+
+        // this.canvas.addEventListener('mousedown', (e)=>{
+        //     let sx = this.canvas.width / this.canvas.offsetWidth;
+        //     let sy = this.canvas.height / this.canvas.offsetHeight;
+        //     this.eventHandler({
+        //         type: 'mousedown',
+        //         x: e.offsetX * sx,
+        //         y: e.offsetY * sy
+        //     });
+        // });
+
+        // this.canvas.addEventListener('mousemove', (e)=>{
+        //     let sx = this.canvas.width / this.canvas.offsetWidth;
+        //     let sy = this.canvas.height / this.canvas.offsetHeight;
+        //     this.eventHandler({
+        //         type: 'mousemove',
+        //         x: e.offsetX * sx,
+        //         y: e.offsetY * sy
+        //     });
+        // });
+
+        // this.canvas.addEventListener('mouseup', (e)=>{
+        //     let sx = this.canvas.width / this.canvas.offsetWidth;
+        //     let sy = this.canvas.height / this.canvas.offsetHeight;
+        //     this.eventHandler({
+        //         type: 'mouseup',
+        //         x: e.offsetX * sx,
+        //         y: e.offsetY * sy
+        //     });
+        // });
     }
 
     /* main ticker function */
@@ -39,10 +75,19 @@ class HUDApp {
         // console.log(delta);
     }
 
+    eventHandler(e: HUDEvent){
+        /* i'm exhausted to continue this mouse event system */
+        // console.log(e);
+        // for (let i = 0; i < this.scene.children.length; ++i){
+
+        // }
+    }
+
     render(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.scene.render(this.context);
+        // this.scene.updateHitArea();
 
         if (this._time < 0) {
             this._time = window.performance.now();

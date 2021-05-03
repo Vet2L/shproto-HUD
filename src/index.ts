@@ -3,6 +3,7 @@ import HUDScore from './score/HUDScore';
 import HUDShop from './shop/HUDShop';
 
 function hudPrototype() {
+    console.warn("Everything f*cked up");
     const div = document.querySelector('.hud-score');
     const app = new HUDApp(div, 1280, 720);
 
@@ -72,6 +73,19 @@ function hudPrototype() {
     shopApp.scene.addChild(shop);
     shop.onResize(900, 720);
 
+    document.addEventListener('keydown', (e)=>{
+        /* b - 66 */
+        // console.log(e.keyCode);
+        switch(e.keyCode) {
+            case 66: // b 
+                shop.toggle();
+                break;
+            default:
+                shop.onKeyDown(e.keyCode);
+                break;
+        }
+    });
+
     //@ts-ignore
     window.shopApp = shopApp;
     //@ts-ignore
@@ -80,4 +94,4 @@ function hudPrototype() {
     console.log("READY");
 }
 
-hudPrototype();
+window.addEventListener('load', ()=>{ hudPrototype(); });

@@ -36,10 +36,15 @@ class HUDCategories extends HUDObject {
 
     setData(data: Array<IShopCategory>){
         this.removeData();
-        console.log(data);
 
         for (let i = 0; i < data.length; ++i) {
             let category = new HUDCategoryItem(data[i]);
+
+            /* key label */
+            if (i < 9) {
+                category.label.text = `'${(i+1)}' ${category.label.text}`;
+            }
+
             this.container.addChild(category);
             this.items.push(category);
         }
@@ -51,6 +56,18 @@ class HUDCategories extends HUDObject {
         };
 
         this.items = [];
+    }
+
+    onFocus(index: number) {
+        for (let i = 0; i < this.items.length; ++i) {
+            (i === index) ? this.items[i].onFocus() : this.items[i].onUnfocus();
+        }
+    }
+
+    resetFocus(){
+        for (let i = 0; i < this.items.length; ++i) {
+            this.items[i].resetFocus();
+        }
     }
 
     onResize(width: number, height: number) {

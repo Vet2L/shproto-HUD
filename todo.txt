@@ -3,5 +3,9 @@ TODO:
 - shop list example +-
 - shop layout +
 - shop scrollable containers (mask) (mask fixed)
-- events (make global rect of all drawable objects for fast check)
-- animations
+- events (make global rect of all drawable objects for fast check) (nah nah nah) -
+- keyboard events: +-
+  "b" - show/hide shop
+  "ESC" - back option
+  "1"-"9" - select category/item
+- animations +-

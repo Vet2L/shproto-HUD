@@ -1,4 +1,5 @@
 import Point from './Point';
+import HitArea from './HitArea';
 
 import HUDGraphics from './HUDGraphics';
 
@@ -7,6 +8,8 @@ class HUDObject {
     pivot: Point;
     anchor: Point;
     scale: Point;
+
+    hitArea: HitArea;
 
     _mask: HUDGraphics;
     parent: HUDObject;
@@ -22,6 +25,7 @@ class HUDObject {
         this.pivot = new Point();
         this.anchor = new Point();
         this.scale = new Point(1, 1);
+        this.hitArea = new HitArea();
 
         this.children = new Array<HUDObject>();
     }
@@ -107,6 +111,15 @@ class HUDObject {
 
         context.restore();
         context.globalAlpha = alpha;
+    }
+
+    updateHitArea(){
+        for (let i = 0; i < this.children.length; ++i) {
+            this.children[i].updateHitArea();
+            this.children[i].hitArea.move(this.position.x, this.position.y);
+            this.children[i].hitArea.scale(this.scale.x, this.scale.y);
+            this.children[i].hitArea.move(-this.pivot.x * this.scale.x, -this.pivot.y * this.scale.y);
+        }
     }
 
     onResize(width: number, height: number){
